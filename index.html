@@ -26,12 +26,53 @@
         font-size: 24px;
         color: #333;
       }
+      p {
+        margin: 40px 0;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <img src="logo-galho-quebrado_1.svg" alt="Logo Galho Quebrado" />
-      <h2>Em breve</h2>
+      <p>Itens mágicos de qualidade</p>
+      <h2>
+        <div id="countdown">00:00:00</div>
+      </h2>
     </div>
+
+    <script>
+      // Define a data de término para o countdown
+      const countdownDate = new Date("2024-10-31T00:00:00").getTime();
+
+      const countdownFunction = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        // Cálculo do tempo restante
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Exibe o tempo restante
+        document.getElementById("countdown").innerHTML =
+          (days > 0 ? days + "d " : "") +
+          hours +
+          "h " +
+          minutes +
+          "m " +
+          seconds +
+          "s ";
+
+        // Quando o countdown terminar
+        if (distance < 0) {
+          clearInterval(countdownFunction);
+          document.getElementById("countdown").innerHTML =
+            "O lançamento chegou!";
+        }
+      }, 1000);
+    </script>
   </body>
 </html>
